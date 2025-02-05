@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/srv-orders/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/srv-orders/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/srv-orders",
+  "projects": {
+    "srv-orders": {
+      "type": "application",
+      "root": "apps/srv-orders",
+      "entryFile": "main",
+      "sourceRoot": "apps/srv-orders/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/srv-orders/tsconfig.app.json"
+      }
+    },
+    "srv-delivery": {
+      "type": "application",
+      "root": "apps/srv-delivery",
+      "entryFile": "main",
+      "sourceRoot": "apps/srv-delivery/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/srv-delivery/tsconfig.app.json"
+      }
+    },
+    "srv-inventory": {
+      "type": "application",
+      "root": "apps/srv-inventory",
+      "entryFile": "main",
+      "sourceRoot": "apps/srv-inventory/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/srv-inventory/tsconfig.app.json"
+      }
+    }
+  }
+}
