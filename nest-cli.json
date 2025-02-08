@@ -10,15 +10,6 @@
   "monorepo": true,
   "root": "apps/srv-orders",
   "projects": {
-    "srv-orders": {
-      "type": "application",
-      "root": "apps/srv-orders",
-      "entryFile": "main",
-      "sourceRoot": "apps/srv-orders/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/srv-orders/tsconfig.app.json"
-      }
-    },
     "srv-delivery": {
       "type": "application",
       "root": "apps/srv-delivery",
@@ -28,6 +19,15 @@
         "tsConfigPath": "apps/srv-delivery/tsconfig.app.json"
       }
     },
+    "srv-gateway": {
+      "type": "application",
+      "root": "apps/srv-gateway",
+      "entryFile": "main",
+      "sourceRoot": "apps/srv-gateway/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/srv-gateway/tsconfig.app.json"
+      }
+    },
     "srv-inventory": {
       "type": "application",
       "root": "apps/srv-inventory",
@@ -35,6 +35,15 @@
       "sourceRoot": "apps/srv-inventory/src",
       "compilerOptions": {
         "tsConfigPath": "apps/srv-inventory/tsconfig.app.json"
+      }
+    },
+    "srv-orders": {
+      "type": "application",
+      "root": "apps/srv-orders",
+      "entryFile": "main",
+      "sourceRoot": "apps/srv-orders/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/srv-orders/tsconfig.app.json"
       }
     }
   }

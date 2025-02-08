@@ -1,22 +1,22 @@
 import { Module } from '@nestjs/common';
-import { InventoryController } from './inventory.controller';
-import { InventoryService } from './inventory.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { OrdersController } from './orders.controller';
+import { OrdersService } from './orders.service';
 
 @Module({
   imports: [
     ClientsModule.register([
       {
-        name: 'SRV_INVENTORY',
+        name: 'KAFKA_CLIENT',
         transport: Transport.KAFKA,
         options: {
           client: { brokers: ['localhost:9092'] },
-          consumer: { groupId: 'inventory-consumer' },
+          consumer: { groupId: 'orders-consumer' },
         },
       },
     ]),
   ],
-  controllers: [InventoryController],
-  providers: [InventoryService],
+  controllers: [OrdersController],
+  providers: [OrdersService],
 })
-export class InventoryModule {}
+export class OrdersModule {}

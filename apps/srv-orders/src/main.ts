@@ -1,13 +1,15 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import { Transport } from '@nestjs/microservices';
+import { OrdersModule } from './orders.module';
 
-const app = await NestFactory.createMicroservice(AppModule, {
+const app = await NestFactory.createMicroservice(OrdersModule, {
   transport: Transport.KAFKA,
   options: {
     client: {
-      clientId: 'orders',
       brokers: ['localhost:9092'],
+    },
+    consumer: {
+      groupId: 'orders-consumer',
     },
   },
 });

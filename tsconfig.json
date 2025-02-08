@@ -15,9 +15,12 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {},
-    "target": "ES2022",           // Set to ES2022 (or ES2017 or higher)
-    "module": "ESNext",           // Set to ESNext for top-level await support
-    "lib": ["ES2022", "DOM"],     // Include ES2022 for features
+    "target": "ES2022", // Set to ES2022 (or ES2017 or higher)
+    "module": "ESNext", // Set to ESNext for top-level await support
+    "lib": [
+      "ES2022",
+      "DOM"
+    ], // Include ES2022 for features
     "moduleResolution": "Node",
     "strict": true,
     "esModuleInterop": true,

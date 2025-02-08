@@ -1,13 +1,13 @@
 import { Controller } from '@nestjs/common';
-import { InventoryService } from './inventory.service';
+import { OrdersService } from './orders.service';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 
 @Controller()
-export class InventoryController {
-  constructor(private readonly inventoryService: InventoryService) {}
+export class OrdersController {
+  constructor(private readonly ordersService: OrdersService) {}
 
   @MessagePattern('order.created')
   async handleOrderCreated(@Payload() data: any) {
-    console.log('Order created:', data);
+    await this.ordersService.processOrder(data);
   }
 }

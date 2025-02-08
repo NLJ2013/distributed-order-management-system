@@ -10,6 +10,9 @@ const app = await NestFactory.createMicroservice(DeliveryModule, {
       clientId: 'delivery',
       brokers: ['localhost:9092'],
     },
+    consumer: {
+      groupId: 'delivery-consumer',
+    },
   },
 });
 
