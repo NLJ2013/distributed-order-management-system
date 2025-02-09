@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
-import { OrdersController } from './controllers/orders/orders.controller';
-import { OrdersService } from './services/orders/orders.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { ProductController } from './controllers/product/product.controller';
+import { ProductService } from './services/product/product.service';
 
 @Module({
   imports: [
     ClientsModule.register([
       {
-        name: 'ORDER_SERVICE',
+        name: 'INVENTORY_SERVICE',
         transport: Transport.KAFKA,
         options: {
           client: { brokers: ['localhost:9092'] },
@@ -15,7 +15,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
       },
     ]),
   ],
-  controllers: [OrdersController],
-  providers: [OrdersService],
+  controllers: [ProductController],
+  providers: [ProductService],
 })
-export class OrdersModule {}
+export class InventoryModule {}

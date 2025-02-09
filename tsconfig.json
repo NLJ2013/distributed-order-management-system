@@ -14,13 +14,20 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
-    "paths": {},
-    "target": "ES2022", // Set to ES2022 (or ES2017 or higher)
-    "module": "ESNext", // Set to ESNext for top-level await support
+    "paths": {
+      "@app/common": [
+        "libs/common/src"
+      ],
+      "@app/common/*": [
+        "libs/common/src/*"
+      ]
+    },
+    "target": "ES2022",
+    "module": "ESNext",
     "lib": [
       "ES2022",
       "DOM"
-    ], // Include ES2022 for features
+    ],
     "moduleResolution": "Node",
     "strict": true,
     "esModuleInterop": true,

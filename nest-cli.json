@@ -10,6 +10,15 @@
   "monorepo": true,
   "root": "apps/srv-orders",
   "projects": {
+    "common": {
+      "type": "library",
+      "root": "libs/common",
+      "entryFile": "index",
+      "sourceRoot": "libs/common/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/common/tsconfig.lib.json"
+      }
+    },
     "srv-delivery": {
       "type": "application",
       "root": "apps/srv-delivery",
