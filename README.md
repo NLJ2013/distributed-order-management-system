@@ -1,30 +1,41 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# Order Management System
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This is a microservices-based order management system built with NestJS, using a monorepo structure. The system implements a distributed, event-driven architecture to handle e-commerce order processing through a set of specialized microservices that communicate with each other using Kafka message broker.
+
+### Key Components:
+
+1. **API Gateway (srv-gateway)**: 
+   - Serves as the entry point for external requests
+   - Provides RESTful API endpoints for order creation and management
+   - Initiates event flows by publishing messages to Kafka topics
+
+2. **Order Service (srv-orders)**:
+   - Handles order processing and lifecycle management
+   - Stores order information in MongoDB
+   - Reacts to events from the gateway and publishes order state change events
+   - Updates order status based on inventory response events
+
+3. **Inventory Service (srv-inventory)**:
+   - Manages product inventory and stock levels
+   - Subscribes to order creation events and checks product availability
+   - Publishes inventory status events (reserved, out of stock)
+   - Updates inventory records based on order events
+
+4. **Delivery Service (srv-delivery)**:
+   - Handles shipping and delivery logistics for confirmed orders
+   - Subscribes to order confirmation events to initiate delivery processes
+   - Publishes delivery status events back to the system
+
+### Technical Stack:
+
+- **Framework**: NestJS (Node.js framework)
+- **Database**: MongoDB with Mongoose ORM
+- **Message Broker**: Kafka for event-driven, asynchronous communication
+- **Architecture**: Distributed, event-driven microservices pattern
+- **Testing**: Jest for unit and e2e testing
+- **Language**: TypeScript
 
 ## Project setup
 
@@ -43,6 +54,15 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+
+# run all services in parallel (recommended for development)
+$ npm run start:all
+
+# run individual services
+$ npm run start:orders      # Start order service
+$ npm run start:inventory   # Start inventory service
+$ npm run start:delivery    # Start delivery service
+$ npm run start:gateway     # Start API gateway
 ```
 
 ## Run tests
@@ -57,29 +77,3 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
