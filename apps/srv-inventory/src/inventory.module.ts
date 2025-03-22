@@ -29,5 +29,6 @@ import { ProductModule } from './modules/product/product.module';
   ],
   controllers: [InventoryController],
   providers: [InventoryService],
+  exports: [InventoryService],
 })
 export class InventoryModule {}

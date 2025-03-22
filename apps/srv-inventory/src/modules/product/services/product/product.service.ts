@@ -53,6 +53,17 @@ export class ProductService {
     return this.productModel.findById(id);
   }
 
+  async getProductByProductId(productId: string) {
+    return this.productModel.findOne({ productId }).lean();
+  }
+
+  async updateProductQuantity(productId: string, quantity: number) {
+    return this.productModel.findOneAndUpdate(
+      { productId },
+      { $inc: { quantity } },
+    );
+  }
+
   async deleteProduct(id: string) {
     return this.productModel.findByIdAndDelete(id);
   }
